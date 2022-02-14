@@ -24,7 +24,7 @@ public class TemplatesPanel extends JPanel {
     //private static final int DEFAULT_HEIGHT = 200;
     //private static final Color BACKGROUND_COLOR = Color.GRAY;
     private ImageList list1;
-    private JList<String> list;
+    
     
     public TemplatesPanel() {
         //setSize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
@@ -34,7 +34,7 @@ public class TemplatesPanel extends JPanel {
         Border titled = BorderFactory.createTitledBorder(border, "Templates");
         setBorder(titled);
         setLayout(new GridLayout(8,1));
-        add(new JLabel("List of templates                                                 "));
+        add(new JLabel("List of templates                                                    "));
         
         
         list1 = new ImageList(Paths.get("./pictures"));
@@ -44,7 +44,7 @@ public class TemplatesPanel extends JPanel {
         //list.setDragEnabled(true);
         //JScrollPane scrollList = new JScrollPane(list);
         
-        //add(scrollList);
+       
         add(new JScrollPane(list1));
     }
 }
