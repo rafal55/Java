@@ -24,11 +24,13 @@ public class HeaderPanel extends JPanel{
         JButton quitButton = new JButton("Exit");
         quitButton.addActionListener(event -> System.exit(0));
         
-        JButton button2 = new JButton("Button 2");
+        JButton plotButton = new JButton("Plot");
+        
+        
         JButton button3 = new JButton("Button 3");
         JButton button4 = new JButton("Button 4");
         bar.add(quitButton);
-        bar.add(button2);
+        bar.add(plotButton);
         bar.add(button3);
         bar.add(button4);
         
