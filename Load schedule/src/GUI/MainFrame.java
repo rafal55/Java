@@ -30,9 +30,18 @@ public class MainFrame extends JFrame {
             
         setJMenuBar(new MenuBar());
         
+        PlotTable plotTable = new PlotTable(dataSheetPanel);
+        //plotTable.getTable();
+        add(plotTable);
+        
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
+       
+        //LayerUI<JPanel> layerUI = new PanelLayer();
+        //JLayer layer = new JLayer(plot, layerUI);
+       // add(layer);
+
 
         //RepaintManager.currentManager(getRootPane()).setDoubleBufferingEnabled(false);
         //((JComponent) getContentPane()).setDebugGraphicsOptions(DebugGraphics.FLASH_OPTION);
