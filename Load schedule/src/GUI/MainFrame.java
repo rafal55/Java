@@ -15,14 +15,15 @@ public class MainFrame extends JFrame {
         setLocationByPlatform(true);
         
         setJMenuBar(new MenuBar());
-        DataSheetPanel table = new DataSheetPanel();
+        DataSheetPanel tableSheet = new DataSheetPanel();
         //PlotPanel plot = new PlotPanel(table);
+       
         DataSheetPlotPanel plot = new DataSheetPlotPanel();
         
         add(new HeaderPanel(), BorderLayout.NORTH);
         add(new ToolsPanel(), BorderLayout.EAST);
         add(new TemplatesPanel(), BorderLayout.WEST);
-        add(new JSplitPane(JSplitPane.VERTICAL_SPLIT, true,  plot, table));
+        add(new JSplitPane(JSplitPane.VERTICAL_SPLIT, true,  plot, tableSheet));
         //add(new PlotTable(dataSheetPanel));
         
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

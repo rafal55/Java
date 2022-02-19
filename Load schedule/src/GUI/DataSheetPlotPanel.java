@@ -34,19 +34,22 @@ class DataSheetPlotPanel extends JPanel implements ComponentListener, TableModel
         this.setMinimumSize(new Dimension(100, 100));
         
         cells = new Object[][] {{""}};
-        columnsName = new String[] {"Stand still"};  
+        columnsName = new String[] {""};  
         
         DefaultTableModel tableModel = new DefaultTableModel(cells, columnsName);
-        
+ 
 
         table = new JTable(tableModel);
+       
+        table.getColumnModel().getColumn(0).setPreferredWidth(1);
         table.setDragEnabled(true);
         table.setDropMode(DropMode.INSERT_COLS);
         table.setTransferHandler(new TemplatesPlotTransferHandler());
+        
         table.setDefaultRenderer(Object.class, new MyTableCellRenderer());
         //table.setRowHeight(100);
         JScrollPane scrollTable = new JScrollPane(table);
-        table.setFillsViewportHeight(true);
+        //table.setFillsViewportHeight(true);
         scrollTable.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
         table.getModel().addTableModelListener(this);
         table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
@@ -67,7 +70,7 @@ class DataSheetPlotPanel extends JPanel implements ComponentListener, TableModel
 
     public void componentResized(ComponentEvent e){
       JSplitPane topPane = (JSplitPane) getParent();
-      System.out.println(topPane.getTopComponent().getSize());
+      System.out.println("Table resized");
       int height = topPane.getTopComponent().getHeight()-50;
       table.setRowHeight(height);
     }
@@ -120,13 +123,13 @@ class MyTableCellRenderer extends JPanel implements TableCellRenderer {
               System.out.println(row);
                 e_x = (i+1) * time_step;
                 e_y = panelHeight - (int) Double.parseDouble(data[i][0]);
-                System.out.println("e_y: " + e_y);
+              
                 g.drawLine(s_x, s_y, e_x , e_y);
                 s_x = e_x;
                 s_y = e_y;
                 column_final_width = e_x;
             }
-            System.out.println("column_final_width " + column_final_width);
+            
             table.getColumnModel().getColumn(column).setPreferredWidth(column_final_width + 1);
            
         }catch (NullPointerException ex){
@@ -147,9 +150,9 @@ class TemplatesPlotTransferHandler extends TransferHandler {
         JList<String> list;
 
         try {
-
+            System.out.println("createTransferable..." );
             list = (JList<String>) source;
-        
+            
         int index = list.getSelectedIndex();
         if (index < 0)
             return null;
