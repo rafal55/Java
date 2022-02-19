@@ -1,26 +1,25 @@
 
 package GUI;
-
+import java.awt.event.*;
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
+import javax.swing.event.*;
 
 import java.awt.*;
 
-
-public class Plot extends JPanel {
+public class PlotPanel extends JPanel {
     /**
      * 
      */
     //private JTextArea textArea;
     private Color bkgColor = new Color(0, 0, 50);
-    private JTable table;
+    private DataSheetPanel table;
     
-    public Plot() {
-        
+    public PlotPanel(DataSheetPanel table) {
+        this.table = table;
         setLayout(new BorderLayout());
         setPreferredSize(getMaximumSize());
         setBackground(bkgColor);
-      
+     // System.out.println(((JSplitPane) getParent()).getBottomComponent());
         /*
         textArea = new JTextArea();
         textArea.setLineWrap(true);
@@ -28,14 +27,11 @@ public class Plot extends JPanel {
         add(textArea);
         */
         }
-    public void update(JTable table) {
-        this.table = table;
-        repaint();
-    }
     
     public void paintComponent(Graphics g){
         
         super.paintComponent(g);
+       
         g.setColor(Color.WHITE);
         
         int time_step = 15;
@@ -46,21 +42,24 @@ public class Plot extends JPanel {
         
         int row;
         try {
-            row = table.getRowCount();
-            
+            row = table.getTable().getRowCount();
+            System.out.println("row count" + row);
             for(int i = 0; i < row; i++) {
-
+                
                 e_x = (i+1) * time_step;
-                String st = table.getValueAt(i, 0).toString();
+                String st = table.getTable().getValueAt(i, 0).toString();
                 e_y = panelHeight - (int) Double.parseDouble(st);
                 g.drawLine(s_x, s_y, e_x , e_y);
                 s_x = e_x;
                 s_y = e_y; 
+                System.out.println("repainting line");
             }
         } catch(NullPointerException ex) {
             
-        }
-        
+            
+        } 
     }
+
+
 }
 

@@ -3,7 +3,9 @@ package GUI;
 import javax.swing.*;
 import javax.swing.border.Border;
 
+
 import java.awt.*;
+import java.util.HashMap;
 
 
 public class TemplatesPanel extends JPanel {
@@ -29,8 +31,8 @@ public class TemplatesPanel extends JPanel {
     
         
         add(label);
-        
-        list = new JList<String>(Templates.getTemplatesNamesList());
+        list = new JList<>(new TListModel());
+        //list = new JList<String>(Templates.getTemplatesNamesList());
 
         list.setVisibleRowCount(8);
         list.setDragEnabled(true);

@@ -12,35 +12,31 @@ import java.awt.datatransfer.*;
 
 import java.io.IOException;
 
-
 public class DataSheetPanel extends JPanel {
-    //private static final int DEFAULT_WIDTH = 300;
-    //private static final int DEFAULT_HEIGHT = 50;
-    //private static final Color BACKGROUND_COLOR = Color.BLACK;
+    // private static final int DEFAULT_WIDTH = 300;
+    // private static final int DEFAULT_HEIGHT = 50;
+    // private static final Color BACKGROUND_COLOR = Color.BLACK;
     private Object[][] cells;
     private String[] columnsName;
     private JTable table;
-    private Plot plot;
-    
-    public DataSheetPanel(Plot plot) {
 
-        this.plot = plot;
-        
+    public DataSheetPanel() {
+
         Border border = BorderFactory.createEtchedBorder();
         Border titled = BorderFactory.createTitledBorder(border, "Data sheet");
         setBorder(titled);
-        
+
         setLayout(new BorderLayout());
         this.setMinimumSize(new Dimension(100, 100));
-        
-        cells = new Object[][] {
-                {0, 0, 0, 0, 0, 0, 0, 0,"stand still"},
-   
+
+        cells = new Object[][]{{0, 0, 0, 0, 0, 0, 0, 0, "stand still"},
+
         };
-        columnsName = new String[] {"Speed", "VIGV", "GT Load", "ST Load", "Gas flow", "Oil flow","S", "OH", "Comment"};  
-        
-        DefaultTableModel tableModel = new DefaultTableModel(cells, columnsName);
-        
+        columnsName = new String[]{"Speed", "VIGV", "GT Load", "ST Load",
+                "Gas flow", "Oil flow", "S", "OH", "Comment"};
+
+        DefaultTableModel tableModel = new DefaultTableModel(cells,
+                columnsName);
 
         table = new JTable(tableModel);
         table.setDragEnabled(true);
@@ -49,25 +45,21 @@ public class DataSheetPanel extends JPanel {
         JScrollPane scrollTable = new JScrollPane(table);
         table.setFillsViewportHeight(true);
 
-                
-                
-        tableModel.addTableModelListener(new TableModelListener() {
-            
-            public void tableChanged(TableModelEvent e) {
-              plot.update(table);
-
-            }
-        });
-        
-
         add(scrollTable);
 
+        tableModel.addTableModelListener(new TableModelListener() {
+            public void tableChanged(TableModelEvent e) {
+                JSplitPane split = (JSplitPane) getParent();
+                split.getTopComponent().repaint();
+            }
+        });
+
     }
-    
+
     public JTable getTable() {
         return table;
     }
-    
+
     class TemplatesTransferHandler extends TransferHandler {
 
         // support for drag
@@ -77,20 +69,20 @@ public class DataSheetPanel extends JPanel {
 
         @Override
         protected Transferable createTransferable(JComponent source) {
-            
+
             JList<String> list;
 
             try {
 
                 list = (JList<String>) source;
-            
-            int index = list.getSelectedIndex();
-            if (index < 0)
-                return null;
-            String txt = (String) list.getSelectedValue();
-            
-            return new StringTransferable(txt);
-            
+
+                int index = list.getSelectedIndex();
+                if (index < 0)
+                    return null;
+                String txt = (String) list.getSelectedValue();
+
+                return new StringTransferable(txt);
+
             } catch (ClassCastException ex) {
                 return null;
             }
@@ -132,10 +124,10 @@ public class DataSheetPanel extends JPanel {
 
                     String templateName = (String) transferable
                             .getTransferData(DataFlavor.stringFlavor);
-                    String[][] data = Templates.getValue(templateName);
+                    String[][] data = TListModel.getTemplate(templateName);
 
-                    System.out.println(
-                            "Setting value of " + templateName + " at row " + row);
+                    System.out.println("Setting value of " + templateName
+                            + " at row " + row);
 
                     for (String[] s : data) {
                         model.insertRow(row++, s);
@@ -153,9 +145,9 @@ public class DataSheetPanel extends JPanel {
     }
 
     class StringTransferable implements Transferable {
-        
+
         private String theString;
-        
+
         public StringTransferable(String s) {
             theString = s;
         }
@@ -174,5 +166,5 @@ public class DataSheetPanel extends JPanel {
             }
         }
     }
-    
+
 }
