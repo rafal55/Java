@@ -31,10 +31,10 @@ class DataSheetPlotPanel extends JPanel implements ComponentListener, TableModel
         setBorder(titled);
         
         setLayout(new BorderLayout());
-        this.setMinimumSize(new Dimension(100, 100));
+        this.setMinimumSize(new Dimension(100, 400));
         
-        cells = new Object[][] {{""}};
-        columnsName = new String[] {""};  
+        cells = new Object[][] {{"0"}};
+        columnsName = new String[] {"Stand still"};  
         
         DefaultTableModel tableModel = new DefaultTableModel(cells, columnsName);
  

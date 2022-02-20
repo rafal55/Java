@@ -25,7 +25,7 @@ public class TemplatesPanel extends JPanel {
         setBorder(titled);
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         String txt = String.format("<html><body style=\"text-align:justify ;  text-justify: inter-word;\">%s</body></html>",
-                "Drag and drop the template name onto the table or the chart");
+                "Drag and drop the template name onto the table or the plot");
         label = new JLabel(txt);
         label.setPreferredSize(new Dimension(140,50));
     
