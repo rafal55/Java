@@ -29,10 +29,10 @@ public class DataSheetPanel extends JPanel {
         setLayout(new BorderLayout());
         this.setMinimumSize(new Dimension(100, 100));
 
-        cells = new Object[][]{{0, 0, 0, 0, 0, 0, 0, 0, "stand still"},
+        cells = new Object[][]{{0, 0, 0, 0, 0, 0, 0, 0, 0, "stand still"},
 
         };
-        columnsName = new String[]{"Speed", "VIGV", "GT Load", "ST Load",
+        columnsName = new String[]{"Time","Speed", "VIGV", "GT Load", "ST Load",
                 "Gas flow", "Oil flow", "S", "OH", "Comment"};
 
         DefaultTableModel tableModel = new DefaultTableModel(cells,

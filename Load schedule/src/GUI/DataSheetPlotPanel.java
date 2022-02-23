@@ -98,7 +98,7 @@ class MyTableCellRenderer extends JPanel implements TableCellRenderer {
             boolean isSelected, boolean hasFocus, int row, int column) {
               this.column = column;
               this.table = table;
-              System.out.println("roww "+ row +", col "+ column + ", header "+ table.getColumnName(column));
+              //System.out.println("roww "+ row +", col "+ column + ", header "+ table.getColumnName(column));
               setData((String) table.getColumnName(column));
  
         return this;
@@ -118,11 +118,11 @@ class MyTableCellRenderer extends JPanel implements TableCellRenderer {
         try{
             row = data.length;
             s_x = 0;
-            s_y =  panelHeight - (int) Double.parseDouble(data[0][0]);
-            for(int i = 1; i < row; i++) {
+            s_y =  panelHeight - (int) Double.parseDouble(data[0][1]);
+            for(int i = 0; i < row; i++) {
               System.out.println(row);
                 e_x = (i+1) * time_step;
-                e_y = panelHeight - (int) Double.parseDouble(data[i][0]);
+                e_y = panelHeight - (int) Double.parseDouble(data[i][1]);
               
                 g.drawLine(s_x, s_y, e_x , e_y);
                 s_x = e_x;
